@@ -2,8 +2,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {StatusBar} from 'react-native';
 
-import CodePush from 'react-native-code-push';
-
 import Routes from './routes';
 
 // import { Container } from './styles';
@@ -20,6 +18,4 @@ const app = () => {
   );
 };
 
-export default CodePush({
-  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-})(app);
+export default app;

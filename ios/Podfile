@@ -77,10 +77,6 @@ target 'servicos' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'CodePush', :path => '../node_modules/react-native-code-push'
-
-  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
-
   target 'servicosTests' do
     inherit! :complete
     # Pods for testing
