@@ -9,7 +9,9 @@ export const Text = styled.Text`
   font-weight: 300;
 `;
 
-export const Option = styled.TouchableOpacity`
+export const Option = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.6,
+})`
   padding: 5%;
   justify-content: center;
   margin: 1px 0 1px 0;

@@ -24,9 +24,16 @@ export const Box = styled(RectButton)`
 `;
 
 export const Avatar = styled.Image`
-  margin: 6% 0 0 5%;
-  width: 15%;
-  height: 50%;
+  margin: 4% 0 0 5%;
+  width: 20%;
+  height: 70%;
+  background: #eee;
+  border-radius: 36px;
+`;
+export const Perfil = styled.Image`
+  margin: 0;
+  width: 100%;
+  height: 40%;
   background: #eee;
   border-radius: 36px;
 `;
@@ -49,7 +56,9 @@ export const TextModal = styled.Text`
   font-weight: bold;
 `;
 
-export const ButtonContato = styled.TouchableOpacity`
+export const ButtonContato = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
   padding: 5%;
   justify-content: center;
   flex-direction: row;
@@ -64,5 +73,7 @@ export const BottomHalfModal = styled.View`
 
 export const ViewContato = styled.View`
   background: white;
-  height: 50%;
+  height: 60%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 `;
