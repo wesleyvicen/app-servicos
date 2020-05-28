@@ -4,7 +4,7 @@ import {RectButton} from 'react-native-gesture-handler';
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  background: #e8eddf;
+  background: #f5f5f5;
 `;
 export const Container2 = styled.View`
   flex: 1;
@@ -15,7 +15,7 @@ export const Container2 = styled.View`
 export const Box = styled(RectButton)`
   justify-content: flex-start;
   flex-direction: row;
-  background: #f5fcf2;
+  background: #edecec;
   height: 100px;
   width: 95%;
   border-radius: 10px;
@@ -44,12 +44,17 @@ export const Text2 = styled.Text.attrs({
 `;
 
 export const TextModal = styled.Text`
-  color: #999;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 export const ButtonContato = styled.TouchableOpacity`
-  padding: 10px;
+  padding: 5%;
+  justify-content: center;
   flex-direction: row;
+  border-radius: 10px;
+  margin: 10px;
 `;
 
 export const BottomHalfModal = styled.View`
@@ -59,4 +64,5 @@ export const BottomHalfModal = styled.View`
 
 export const ViewContato = styled.View`
   background: white;
+  height: 50%;
 `;

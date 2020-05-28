@@ -6,11 +6,11 @@ export const Container = styled.View`
   padding: 20px;
   justify-content: center;
   align-items: center;
-  background: #e8eddf;
+  background: #f5f5f5;
 `;
 
 export const Text = styled.Text`
-  color: #e8eddf;
+  color: #f5f5f5;
   font-weight: bold;
   bottom: 4%;
   position: absolute;

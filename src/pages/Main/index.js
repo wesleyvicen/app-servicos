@@ -24,13 +24,13 @@ const Main = ({navigation}) => {
   let [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    loadProfession();
+    loadCategory();
   }, []);
 
-  async function loadProfession() {
+  async function loadCategory() {
     try {
       setLoading(true);
-      let response = await api.get('/profession/lists');
+      let response = await api.get('/category/lists');
       setData(response.data);
       setIsFetching(false);
       setLoading(false);
@@ -41,7 +41,7 @@ const Main = ({navigation}) => {
   }
 
   function onRefresh() {
-    setIsFetching(true), loadProfession();
+    setIsFetching(true), loadCategory();
   }
 
   const columns = 2;
@@ -49,7 +49,7 @@ const Main = ({navigation}) => {
     <Container>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => `list-item-${item.id}`}
         numColumns={columns}
         showsVerticalScrollIndicator={false}
         onRefresh={() => onRefresh()}
@@ -60,7 +60,7 @@ const Main = ({navigation}) => {
               <Button
                 style={styles.item}
                 onPress={() =>
-                  navigation.navigate('User', {
+                  navigation.navigate('SubCategory', {
                     name: item.name,
                     id: item.id,
                   })

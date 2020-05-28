@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
 
     elevation: 7,
   },
+
+  backWhats: {
+    backgroundColor: '#95cb85',
+  },
+  backTell: {
+    backgroundColor: '#E14653',
+  },
   modal: {
     margin: 0,
     justifyContent: 'flex-end',
@@ -47,7 +54,7 @@ const User = ({route}) => {
 
   async function loadUsers() {
     try {
-      let response = await api.get(`/user/lists/${id}`);
+      let response = await api.get(`/profession/lists/${id}`);
       setData(response.data.data);
       console.tron.log(response.data.data);
     } catch (error) {
@@ -79,7 +86,7 @@ const User = ({route}) => {
                 onPress={() => toggleModal(item.contacts)}>
                 <Avatar source={{uri: item.urlImage}} />
                 <Container2>
-                  <Text style={styles.item}>{item.name}</Text>
+                  <Text>{item.name}</Text>
                   <Text2>{item.servicos}</Text2>
                 </Container2>
               </Box>
@@ -87,33 +94,62 @@ const User = ({route}) => {
                 testID={'modal'}
                 isVisible={isModalVisible}
                 backdropOpacity={0.3}
+                onBackdropPress={toggleModal}
                 style={styles.modal}>
                 <BottomHalfModal>
                   <ViewContato>
                     <FlatList
                       data={contato}
                       keyExtractor={(index) => `list-item-${index.id}`}
-                      renderItem={({item}) => (
-                        <>
-                          <ButtonContato
-                            style={styles.button}
-                            onPress={() => Linking.openURL(`tel:${item.num}`)}>
-                            <Icon name="call" size={26} color="#eb3b3d" />
-                            <TextModal>
-                              {'   '}
-                              Ligar para:{' '}
-                              {item.num
-                                .replace(/\D/g, '')
-                                .replace(/(\d{0})(\d)/, '$1($2')
-                                .replace(/(\d{2})(\d)/, '$1) $2')
-                                .replace(/(\d{5})(\d)/, '$1 $2')}
-                            </TextModal>
-                          </ButtonContato>
-                        </>
-                      )}
+                      renderItem={({item}) => {
+                        if (item.whatsapp) {
+                          return (
+                            <ButtonContato
+                              style={[styles.item, styles.backWhats]}
+                              onPress={() =>
+                                Linking.openURL(
+                                  `https://api.whatsapp.com/send?phone=55${item.num}&text=Vim%20pelo%20Contrate%20J%C3%A1!`,
+                                )
+                              }>
+                              <Icon name="call" size={26} color="white" />
+                              <TextModal>
+                                {'   '}
+                                Whatsapp:{' '}
+                                {item.num
+                                  .replace(/\D/g, '')
+                                  .replace(/(\d{0})(\d)/, '$1($2')
+                                  .replace(/(\d{2})(\d)/, '$1) $2')
+                                  .replace(/(\d{5})(\d)/, '$1 $2')}
+                              </TextModal>
+                            </ButtonContato>
+                          );
+                        } else {
+                          return (
+                            <>
+                              <ButtonContato
+                                style={[styles.item, styles.backTell]}
+                                onPress={() =>
+                                  Linking.openURL(`tel:${item.num}`)
+                                }>
+                                <Icon name="call" size={26} color="white" />
+                                <TextModal>
+                                  {'   '}
+                                  Ligar para:{' '}
+                                  {item.num
+                                    .replace(/\D/g, '')
+                                    .replace(/(\d{0})(\d)/, '$1($2')
+                                    .replace(/(\d{2})(\d)/, '$1) $2')
+                                    .replace(/(\d{5})(\d)/, '$1 $2')}
+                                </TextModal>
+                              </ButtonContato>
+                            </>
+                          );
+                        }
+                      }}
                     />
-                    <Button title="Cancelar" onPress={toggleModal} />
                   </ViewContato>
+
+                  <Button title="Cancelar" onPress={toggleModal} />
                 </BottomHalfModal>
               </Modal>
             </>
