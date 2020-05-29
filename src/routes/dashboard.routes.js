@@ -34,7 +34,7 @@ export default function DashBoardRoutes() {
         name="Teste"
         component={Teste}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Calendario',
           tabBarIcon: ({color, size, focused}) => (
             <MaterialCommunityIcons
               name="calendar"

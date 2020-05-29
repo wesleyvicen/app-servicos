@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
 export const Text = styled.Text`
+  font-family: Roboto-Regular;
   font-size: 30;
-  font-weight: 200;
   color: white;
 `;
 
 export const Container = styled.View`
-  height: 20%;
+  height: 25%;
+  width: 100%;
+`;
+export const View = styled.View`
   background: #e63946;
 `;

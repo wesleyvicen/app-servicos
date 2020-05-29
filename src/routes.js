@@ -12,19 +12,16 @@ import DashBoardRoutes from './routes/dashboard.routes';
 const Stack = createStackNavigator();
 const Routes = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {backgroundColor: '#E63946', height: 80},
-        headerTitleAlign: 'center',
-        headerTintColor: '#f5f5f5',
-        headerPressColorAndroid: 'white',
-      }}>
+    <Stack.Navigator>
       <Stack.Screen
         name="DashBoard"
         component={DashBoardRoutes}
         options={{
-          title: 'Dashboard',
+          title: '',
           color: 'white',
+          headerStyle: {backgroundColor: 'transparent', height: 0},
+
+          transparentCard: true,
         }}
       />
       <Stack.Screen
