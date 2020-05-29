@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Button} from 'react-native';
 import api from '../../../services/api';
+import {List} from 'react-native-paper';
 
 import {Container, Text, Option} from './styles';
 
@@ -34,31 +35,34 @@ const SubCategories = ({route, navigation}) => {
 
   const columns = 1;
   return (
-    <Container>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => `list-item-${item.id}`}
-        numColumns={columns}
-        showsVerticalScrollIndicator={false}
-        onRefresh={() => onRefresh()}
-        refreshing={isFetching}
-        renderItem={({item}) => {
-          return (
-            <>
-              <Option
-                onPress={() =>
-                  navigation.navigate('User', {
-                    name: item.name,
-                    id: item.id,
-                  })
-                }>
-                <Text>{item.name}</Text>
-              </Option>
-            </>
-          );
-        }}
-      />
-    </Container>
+    <>
+      <Container>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => `list-item-${item.id}`}
+          numColumns={columns}
+          showsVerticalScrollIndicator={false}
+          onRefresh={() => onRefresh()}
+          refreshing={isFetching}
+          renderItem={({item}) => {
+            return (
+              <>
+                <List.Item
+                  title={item.name}
+                  left={(props) => <List.Icon {...props} icon="account-tie" />}
+                  onPress={() =>
+                    navigation.navigate('User', {
+                      name: item.name,
+                      id: item.id,
+                    })
+                  }
+                />
+              </>
+            );
+          }}
+        />
+      </Container>
+    </>
   );
 };
 

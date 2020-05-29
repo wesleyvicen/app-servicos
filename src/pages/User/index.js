@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const User = ({route}) => {
+const User = ({route, navigation}) => {
   const {id} = route.params;
   let [contato, setContato] = useState([]);
   let [data, setData] = useState([]);

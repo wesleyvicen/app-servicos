@@ -8,6 +8,10 @@ export const Container = styled.View`
   align-items: center;
   background: #f5f5f5;
 `;
+export const Container2 = styled.View`
+  padding: 20px;
+  background: #f5f5f5;
+`;
 
 export const Text = styled.Text`
   color: #f5f5f5;

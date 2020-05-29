@@ -1,15 +1,16 @@
 import React from 'react';
+import {Animated} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // import { Container } from './styles';
 
-import Main from './pages/Main';
+//import Main from './pages/Main';
 import User from './pages/User';
 import SubCategory from './pages/Components/SubCategories';
+import DashBoardRoutes from './routes/dashboard.routes';
 
 const Stack = createStackNavigator();
-
-const src = () => {
+const Routes = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,8 +21,11 @@ const src = () => {
       }}>
       <Stack.Screen
         name="DashBoard"
-        component={Main}
-        options={{title: 'Dashboard', color: 'white'}}
+        component={DashBoardRoutes}
+        options={{
+          title: 'Dashboard',
+          color: 'white',
+        }}
       />
       <Stack.Screen
         name="User"
@@ -37,4 +41,4 @@ const src = () => {
   );
 };
 
-export default src;
+export default Routes;
