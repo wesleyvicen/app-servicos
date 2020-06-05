@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, StyleSheet, Button, Linking} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
 import api from '../../services/api';
+import NetInfo from '@react-native-community/netinfo';
 
 import {
   Container,
@@ -16,6 +17,10 @@ import {
   ButtonContato,
   TextModal,
   Perfil,
+  Description,
+  TextDescription,
+  ViewPerfil,
+  TextConection,
 } from './styles';
 
 const styles = StyleSheet.create({
@@ -30,16 +35,13 @@ const styles = StyleSheet.create({
 
     elevation: 7,
   },
-
-  backWhats: {
-    backgroundColor: '#95cb85',
-  },
-  backTell: {
-    backgroundColor: '#E14653',
-  },
   modal: {
     margin: 0,
     justifyContent: 'flex-end',
+  },
+  icon: {
+    fontSize: 200,
+    flex: 1,
   },
 });
 
@@ -48,9 +50,16 @@ const User = ({route, navigation}) => {
   let [contato, setContato] = useState([]);
   let [data, setData] = useState([]);
   let [isModalVisible, setModalVisible] = useState(false);
+  let [isInternetReachable, setIsInternetReachable] = useState(true);
 
   useEffect(() => {
-    loadUsers();
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsInternetReachable(state.isInternetReachable);
+    });
+    unsubscribe();
+    if (isInternetReachable) {
+      loadUsers();
+    }
   }, []);
 
   async function loadUsers() {
@@ -74,6 +83,15 @@ const User = ({route, navigation}) => {
 
   return (
     <Container>
+      {isInternetReachable ? (
+        <TextConection />
+      ) : (
+        <TextConection>
+          <Icon style={styles.icon} name="pipe-disconnected" color="#E63946" />
+          {`\n`}
+          Poooxa, Você não está conectado...
+        </TextConection>
+      )}
       <FlatList
         data={data}
         keyExtractor={(index) => `list-item-${index.id}`}
@@ -86,6 +104,7 @@ const User = ({route, navigation}) => {
                 <Avatar source={{uri: item.urlImage}} />
                 <Container2>
                   <Text>{item.name}</Text>
+
                   <Text2>{item.description}</Text2>
                 </Container2>
               </Box>
@@ -101,8 +120,12 @@ const User = ({route, navigation}) => {
         style={styles.modal}>
         <BottomHalfModal>
           <ViewContato>
-            <Perfil source={{uri: contato.urlImage}} />
-            <Text2>{contato.description}</Text2>
+            <ViewPerfil>
+              <Perfil source={{uri: contato.urlImage}} />
+            </ViewPerfil>
+            <Description style={styles.item}>
+              <TextDescription>{contato.description}</TextDescription>
+            </Description>
             <FlatList
               data={contato.contact}
               keyExtractor={(index) => `list-item-${index.id}`}
@@ -111,13 +134,13 @@ const User = ({route, navigation}) => {
                   return (
                     <>
                       <ButtonContato
-                        style={[styles.item, styles.backWhats]}
+                        style={[styles.item]}
                         onPress={() =>
                           Linking.openURL(
                             `https://api.whatsapp.com/send?phone=55${item.num}&text=Vim%20pelo%20Contrate%20J%C3%A1!`,
                           )
                         }>
-                        <Icon name="call" size={26} color="white" />
+                        <Icon name="whatsapp" size={26} color="#25d366" />
                         <TextModal>
                           {'   '}
                           Whatsapp:{' '}
@@ -134,9 +157,9 @@ const User = ({route, navigation}) => {
                   return (
                     <>
                       <ButtonContato
-                        style={[styles.item, styles.backTell]}
+                        style={[styles.item]}
                         onPress={() => Linking.openURL(`tel:${item.num}`)}>
-                        <Icon name="call" size={26} color="white" />
+                        <Icon name="phone" size={26} color="#E63946" />
                         <TextModal>
                           {'   '}
                           Ligar para:{' '}

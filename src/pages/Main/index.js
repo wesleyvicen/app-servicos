@@ -1,9 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, StyleSheet, ActivityIndicator} from 'react-native';
-import api from '../../services/api';
+import NetInfo from '@react-native-community/netinfo';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Container, Container2, Text, Avatar, Button, BackText} from './styles';
+import {
+  Container,
+  Text,
+  Avatar,
+  Button,
+  BackText,
+  TextConection,
+} from './styles';
 import MenssageInitial from '../Components/menssageInitial';
+import api from '../../services/api';
 
 const styles = StyleSheet.create({
   item: {
@@ -17,15 +26,26 @@ const styles = StyleSheet.create({
 
     elevation: 7,
   },
+  icon: {
+    fontSize: 200,
+    flex: 1,
+  },
 });
 
 const Main = ({navigation}) => {
   let [data, setData] = useState([]);
   let [loading, setLoading] = useState(false);
   let [isFetching, setIsFetching] = useState(false);
+  let [isInternetReachable, setIsInternetReachable] = useState(true);
 
   useEffect(() => {
-    loadCategory();
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsInternetReachable(state.isInternetReachable);
+    });
+    unsubscribe();
+    if (isInternetReachable) {
+      loadCategory();
+    }
   }, []);
 
   async function loadCategory() {
@@ -50,6 +70,20 @@ const Main = ({navigation}) => {
     <>
       <MenssageInitial />
       <Container>
+        {isInternetReachable ? (
+          <TextConection />
+        ) : (
+          <TextConection>
+            <Icon
+              style={styles.icon}
+              name="pipe-disconnected"
+              color="#E63946"
+            />
+            {`\n`}
+            Poooxa, Você não está conectado...
+          </TextConection>
+        )}
+
         <FlatList
           data={data}
           keyExtractor={(item) => `list-item-${item.id}`}

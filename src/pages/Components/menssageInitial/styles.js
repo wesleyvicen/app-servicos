@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Text = styled.Text`
   font-family: Roboto-Regular;
-  font-size: 30;
+  font-size: 30px;
   color: white;
 `;
 

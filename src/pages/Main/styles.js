@@ -58,3 +58,13 @@ export const Button = styled(RectButton)`
   border-color: #000;
   opacity: ${(props) => (props.loading ? 0.7 : 1)};
 `;
+export const TextConection = styled.Text`
+  color: #000;
+  font-family: Roboto;
+  align-items: center;
+`;
+
+export const ViewConnection = styled.View`
+  justify-content: center;
+  align-items: center;
+`;

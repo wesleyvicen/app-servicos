@@ -15,7 +15,7 @@ export const Container2 = styled.View`
 export const Box = styled(RectButton)`
   justify-content: flex-start;
   flex-direction: row;
-  background: #edecec;
+  background: white;
   height: 100px;
   width: 95%;
   border-radius: 10px;
@@ -31,27 +31,40 @@ export const Avatar = styled.Image`
   border-radius: 36px;
 `;
 export const Perfil = styled.Image`
-  margin: 0;
+  position: absolute;
+  resize-mode: cover;
+  width: 100%;
+  height: 200%;
+  background: #eee;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+`;
+export const ViewPerfil = styled.View`
+  position: relative;
   width: 100%;
   height: 40%;
+  overflow: hidden;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   background: #eee;
-  border-radius: 36px;
 `;
 
 export const Text = styled.Text`
   color: #1d3557;
   font-weight: bold;
+  font-family: Roboto;
 `;
 
 export const Text2 = styled.Text.attrs({
   numberOfLines: 2,
 })`
+  font-family: Roboto;
   color: #1d3557;
   font-weight: 200;
 `;
 
 export const TextModal = styled.Text`
-  color: white;
+  font-family: Roboto;
   font-size: 18px;
   font-weight: bold;
 `;
@@ -63,7 +76,8 @@ export const ButtonContato = styled.TouchableOpacity.attrs({
   justify-content: center;
   flex-direction: row;
   border-radius: 10px;
-  margin: 10px;
+  margin: 5px 10px;
+  background: white;
 `;
 
 export const BottomHalfModal = styled.View`
@@ -72,8 +86,36 @@ export const BottomHalfModal = styled.View`
 `;
 
 export const ViewContato = styled.View`
-  background: white;
+  background: #f5f5f5;
   height: 60%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+`;
+
+export const Description = styled.View`
+  background: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 5px 10px #888888;
+  margin-bottom: 5px;
+`;
+
+export const TextDescription = styled.Text.attrs({
+  numberOfLines: 3,
+})`
+  margin: 10px 15px;
+  color: #000;
+  font-family: Roboto;
+  font-size: 16px;
+`;
+
+export const TextConection = styled.Text`
+  color: #000;
+  font-family: Roboto;
+  align-items: center;
+`;
+
+export const ViewConnection = styled.View`
+  justify-content: center;
+  align-items: center;
 `;
